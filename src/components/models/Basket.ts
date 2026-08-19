@@ -1,7 +1,7 @@
-import { IProduct } from "../../../types/index";
+import { IProduct } from "../../types/index";
 
 export class Basket {
-  items: IProduct[];
+  private items: IProduct[];
 
   constructor() {
     this.items = [];
@@ -15,8 +15,8 @@ export class Basket {
     this.items.push(product);
   }
 
-  removeItem(product: IProduct): void {
-    this.items = this.items.filter((item) => item.id !== product.id);
+  removeItem(id: string): void {
+    this.items = this.items.filter((item) => item.id !== id);
   }
 
   clear(): void {

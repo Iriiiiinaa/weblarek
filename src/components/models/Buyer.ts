@@ -1,10 +1,10 @@
-import { TPayment, IBuyer, IBuyerErrors } from "../../../types/index";
+import { TPayment, IBuyer, IErrorsBuyer } from "../../types/index";
 
 export class Buyer {
-  payment: TPayment | null;
-  email: string;
-  phone: string;
-  address: string;
+  private payment: TPayment | null;
+  private email: string;
+  private phone: string;
+  private address: string;
 
   constructor() {
     this.payment = null;
@@ -30,10 +30,6 @@ export class Buyer {
   }
 
   getData(): IBuyer {
-    if (!this.payment) {
-      throw new Error("Не выбран способ оплаты");
-    }
-
     return {
       payment: this.payment,
       email: this.email,
@@ -49,22 +45,22 @@ export class Buyer {
     this.address = "";
   }
 
-  validate(): IBuyerErrors {
-    const errors: IBuyerErrors = {};
+  validate(): IErrorsBuyer {
+    const errors: IErrorsBuyer = {};
 
     if (!this.payment) {
       errors.payment = "Не выбран вид оплаты";
     }
 
-    if (!this.email) {
+    if (!this.email.trim()) {
       errors.email = "Укажите email";
     }
 
-    if (!this.phone) {
+    if (!this.phone.trim()) {
       errors.phone = "Укажите телефон";
     }
 
-    if (!this.address) {
+    if (!this.address.trim()) {
       errors.address = "Укажите адрес";
     }
 

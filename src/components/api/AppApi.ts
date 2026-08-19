@@ -6,7 +6,7 @@ import type {
 } from "../../types/index";
 
 export class AppApi {
-  api: IApi;
+  private api: IApi;
 
   constructor(api: IApi) {
     this.api = api;
